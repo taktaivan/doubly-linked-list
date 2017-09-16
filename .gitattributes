@@ -1,2 +1,63 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+* text=autohttps
+#include <stdlib.h> 
+#include "stdafx.h" 
+#include <iostream> 
+#include <windows.h> 
+
+using namespace std;
+
+struct node_s {
+	int data;
+	node_s* prev = nullptr;
+	node_s* next = nullptr;
+};
+
+struct list_s {
+	int size = 0;
+	node_s* first_adress = nullptr;
+	node_s* last_adress = nullptr;
+};
+
+
+void insert(int value, int after, list_s* list_descr);
+void del(int value, list_s* list_descr);
+void add_end(int value, list_s* list_descr);
+void add_start(int value, list_s* list_descr);
+
+int _tmain(int argc, _TCHAR* argv[]) {
+	return 0;
+}
+
+void insert(int value, unsigned int num, list_s*inf) {
+
+}
+
+void add_end(int value, list_s*inf) {
+	node_s *new_element = new node_s;
+	new_element->data = value;
+	new_element->prev = inf->last_adress;
+	inf->last_adress = new_element;
+	new_element->prev->next = new_element;
+	inf->size++;
+}
+void add_start(int value, list_s*inf) {
+	node_s *new_element = new node_s;
+	new_element->data = value;
+	new_element->next = inf->first_adress;
+	inf->first_adress = new_element;
+	new_element->next->prev = new_element;
+	inf->size++;
+}
+void del(int value, list_s*inf){
+	node_s* it = inf->first_adress;
+	while (it) {
+		if (it->data == value) { // (*it).data
+			it->prev->next = it->next;
+			it->next->prev = it->prev;
+			delete it;
+			break;
+		}
+		it = it->next;
+	}
+}
